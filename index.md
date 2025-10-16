@@ -3,7 +3,7 @@
       font-size: 48pt;
   }
   .space-above {
-      padding-top: 100px;
+      padding-top: 50px;
   }
   .large-text {
       font-size: 36pt;
@@ -17,61 +17,61 @@
 { center="~duration:0" #title }
 # OCaml Package Management with (only!) Dune
 
-{ pause up=title }
+{ pause up="~duration:0" }
+## Opam and Dune
 
 { pause }
 
-{ .large-text .space-above }
-> Let's make an OCaml project with Dune:
-> { pause }
-> - with external dependencies
-> { pause }
-> - using only Dune to install the dependencies
-> { pause }
-> - and using Dune to install development tools
+### Opam
+
+- Metadata format for OCaml packages
+- Tool for installing packages
+- Repository of ~4500 packages
+
+{ pause }
+
+### Dune
+
+- Build system for OCaml projects
+- Used by about 3/4 of packages in Opam's repository
+- Dependent on Opam to install dependencies... { pause } until now!
+
+{ pause }
+
+### Dune Package Management
+
+- Dune can download and build Opam packages
+- Parts of Opam turned into libraries and added to Dune
+- Still using Opam metadata format and repository
+
+{ pause }
+
+### Live Demo of Dune Package Management
+
+Let's make an OCaml project using Dune:
+- With external dependencies
+- Using only Dune to install the dependencies
+- And using Dune to install development tools
 
 { pause up="~duration:0" }
-## Make a New Dune Project
+## Project Setup
 
+Unload the Opam environment:
+```text
+$ eval $(opam env --revert)
 ```
+
+{ pause }
+
+Make a project:
+```text
 $ dune init project hello
 ```
 
-{ up }
-### Generated files which we'll modify
-
-`bin/main.ml`:
-```ocaml
-let () = print_endline "Hello, World!"
-```
-
-`bin/dune`:
-```
-(executable
- (public_name hello)
- (name main)
- (libraries hello))
-```
-
-`dune-project`:
-```
-(lang dune 3.20)
-
-(name hello)
-...
-(package
- (name hello)
- ...
- (depends ocaml))
-```
-
-{ pause up="~duration:0" }
-## Build with Package Management
-
-The project currently depends on a single package: `ocaml`.
+{ pause }
 
 Make a "Lock Directory" (lockdir):
-```
+```text
 $ dune pkg lock
 Solution for dune.lock:
 - ocaml.5.3.0
@@ -80,58 +80,24 @@ Solution for dune.lock:
 - ocaml-config.3
 ```
 
-Enable feature to print build progress:
-```
-$ export DUNE_CONFIG__PKG_BUILD_PROGRESS=enabled
-```
-
-Clean up the previously built artifacts:
-```
-$ dune clean
-```
+{ pause }
 
 Build the project with package management!
 
-```
-$ dune build
- Downloading ocaml-compiler.5.3.0
-    Building ocaml-compiler.5.3.0
- Downloading ocaml-base-compiler.5.3.0
-    Building ocaml-base-compiler.5.3.0
-
+```text
+$ dune exec hello
 Hello, World!
 ```
-{ down }
-
-{ pause up="~duration:0" }
-## Dune as a Package Manager
-
-- Solves dependencies within one or more Opam repositories
-- Transcribes metadata from Opam files into sexp files in a "lockdir"
-
-{ .remark }
-> Lockdirs contain source urls and build commands for each package in the
-> project's transitive dependency closure.
->
-> The package solution in a lockdir is specialized to the machine where it was
-> generated. They are not portable between machines. Consider this when
-> deciding whether to check them into version control.
->
-> Think of a lockdir as a local cache of an opam package solution rather than a
-> lockfile in the sense of say `package-lock.json` or `Cargo.lock`.
->
-> It's a work-in-progress to generate lockdirs inside the _build directory by
-> default rather than the project root directory.
-
-More details on lockdirs later in this talk!
 
 { pause up="~duration:0" }
 ## Add a Dependency
 
-Let's make a little website with Dream!
+Let's make a little website with the Dream web framework!
+
+{ pause }
 
 Add a dependency on the `dream` package in `dune-project`:
-```
+```text
 ...
 (package
  (name hello)
@@ -139,13 +105,17 @@ Add a dependency on the `dream` package in `dune-project`:
  (depends ocaml dream))
 ```
 
+{ pause }
+
 Declare that the `hello` executable uses the `dream` _library_ in `bin/dune`:
-```
+```text
 (executable
  (public_name hello)
  (name main)
  (libraries hello dream))
 ```
+
+{ pause }
 
 Build the project with the dependency:
 ```text
@@ -171,14 +141,10 @@ Solution for dune.lock:
 - zarith.1.14
 ```
 
-Build, downloading and building all deps:
+And build again:
 ```text
-$ dune build
-    Building base-threads.base
-    Building conf-pkg-config.4
-...
- Downloading dream.1.0.0~alpha8
-    Building dream.1.0.0~alpha8
+$ dune exec hello
+Hello, World!
 ```
 
 { pause down }
@@ -201,10 +167,14 @@ I need LSP!
 - The LSP server must be compiled with the same compiler as the code it analyzes
 - Dune installs your compiler so it must also build your LSP
 
+{ pause }
+
 Install LSP:
 ```bash
 $ dune tools install ocamllsp
 ```
+
+{ pause }
 
 Where did it go:
 ```bash
@@ -212,13 +182,17 @@ $ dune tools which ocamllsp
 _build/_private/default/.dev-tool/ocaml-lsp-server/target/bin/ocamllsp
 ```
 
+{ pause }
+
 Add it to `PATH`:
 ```bash
 $ eval $(dune tools env)
 ```
 
+{ pause }
+
 ...and install ocamlformat while we're at it:
-```
+```bash
 $ dune tools install ocamlformat
 ```
 
@@ -264,10 +238,17 @@ To use a custom source location for a dependency, "pin" it in `dune-project`:
   (name dream)))
 ```
 
-And re-solve dependencies:
+And re-solve dependencies (again, soon this won't be necessary!):
 
 ```text
 $ dune pkg lock
+```
+
+Rebuild and run including the change to the pinned `dream` package:
+```text
+$ dune exec hello
+15.10.25 04:00:10.097       Running at http://localhost:8081
+15.10.25 04:00:10.097       Type Ctrl+C to stop
 ```
 
 { pause up="~duration:0" .fullscreen-center }
@@ -326,6 +307,40 @@ $ dune pkg lock
    sha256=23ed812890c03fe5c9974a4961a9e8e62126bed7bc7d7d1440b84652c95cf296)))
 ```
 
+{ pause }
+
+- Dune uses lock _directories_ rather than lock files for easy of code review of dependency changes.
+
+- It's a work-in-progress to generate lockdirs inside the _build directory by
+default rather than the project root directory.
+
+- Think of a lockdir as a local cache of an opam package solution rather than a
+lockfile in the sense of say `package-lock.json` or `Cargo.lock`
+
+- The package solution in a lockdir is specialized to the machine where it was
+generated. They are not portable between machines. Consider this when
+deciding whether to check them into version control.
+
+{ pause down }
+
+{ pause up="~duration:0" }
+## Portable Lockdirs Prototype
+
+- This feature is a prototype for a lockfile format which is generalized to work on multiple platforms.
+
+- Safe to check into version control.
+
+- A Software Bill Of Materials for all the platforms where it will be deployed.
+
+```bash
+$ export DUNE_CONFIG__PORTABLE_LOCK_DIR=enabled
+$ dune pkg lock
+```
+
+- The feature flag is only necessary for _generating_ portable lockfiles.
+
+- Without the flag, Dune will still interpret portable lockfiles if it sees them.
+
 { pause up="~duration:0" }
 ## Where are the packages?
 
@@ -335,8 +350,8 @@ _build/_private/default/.pkg/<name>.<version>-<hash>
 ```
 
 - `source` directory contains copy of the project source
-- `target` directory contains built artifacts akin to an Opam switch
 
+- `target` directory contains built artifacts akin to an Opam switch
 
 { pause up="~duration:0" }
 ## Custom Opam Repos
@@ -390,46 +405,19 @@ The dependency solver is a pure function of:
 Freezing the repositories lets you choose when you update your dependencies
 without needing to check a lock directory into version control.
 
-{ pause up="~duration:0" .fullscreen-center }
-# Extras
-
-{ pause up="~duration:0" }
-## Binary Install Script
-
-If you don't have Opam you can install Dune by running:
-
-``
-$ curl -4fsSL https://github.com/ocaml-dune/dune-bin-install/releases/download/v3/install.sh | sh
-``
-
-- Runs an interactive installer which installs a pre-built version of Dune for your system.
-- Follows installation conventions. Dune will be installed to `~/.local/bin` by default.
-- Doesn't modify your shell config file without asking first.
-- Installs shell completions for bash and zsh!
-
-{ pause up="~duration:0" }
-## Portable Lockfiles
-
-- Dune's lockfiles are specialized to the machine where they are generated.
-- This feature is a prototype for a lockfile format which is generalized to work on multiple platforms.
-- Safe to check into version control!
-
-```bash
-$ export DUNE_CONFIG__PORTABLE_LOCK_DIR=enabled
-$ dune pkg lock
-```
-
-- The feature flag is only necessary for _generating_ portable lockfiles.
-- Without the flag, Dune will still interpret portable lockfiles if it sees them.
-
 { pause up="~duration:0" }
 # Future Work
 
 { .large-text .space-above }
+> { pause }
 > - Automatically solving dependencies (no more `dune pkg lock`)
 > { pause }
 > - Allow building projects with circular deps via test deps (e.g. Dune itself via `ppx_expect`!)
 > { pause }
 > - Windows support
+> { pause }
+> - Package maintenance features (e.g. building reverse dependencies to test impact of local changes)
+> { pause }
+> - Dune packages for system packages (apt, brew, etc)
 > { pause }
 > - More features from Opam (e.g. package search)

@@ -1810,7 +1810,7 @@ relevance:0},{begin:/-&gt;/}]})})();hljs.registerLanguage(&quot;ocaml&quot;,e)})
       font-size: 48pt;
   }
   .space-above {
-      padding-top: 100px;
+      padding-top: 50px;
   }
   .large-text {
       font-size: 36pt;
@@ -1821,106 +1821,76 @@ relevance:0},{begin:/-&gt;/}]})})();hljs.registerLanguage(&quot;ocaml&quot;,e)})
   }
 &lt;/style&gt;
 &lt;h1 id=&quot;title&quot; center-at-unpause=&quot;~duration:0&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#title&quot;&gt;&lt;/a&gt;&lt;span&gt;OCaml Package Management with (only!) Dune&lt;/span&gt;&lt;/h1&gt;
-&lt;div up-at-unpause=title pause&gt;&lt;/div&gt;
+&lt;h2 id=&quot;opam-and-dune&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#opam-and-dune&quot;&gt;&lt;/a&gt;&lt;span&gt;Opam and Dune&lt;/span&gt;&lt;/h2&gt;
 &lt;div pause&gt;&lt;/div&gt;
-&lt;div class=&quot;large-text space-above&quot;&gt;
-&lt;p&gt;&lt;span&gt;Let's make an OCaml project with Dune:&lt;/span&gt;
-&lt;span pause&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;opam&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#opam&quot;&gt;&lt;/a&gt;&lt;span&gt;Opam&lt;/span&gt;&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span&gt;with external dependencies&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Metadata format for OCaml packages&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Tool for installing packages&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Repository of ~4500 packages&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div pause&gt;
+&lt;div pause&gt;&lt;/div&gt;
+&lt;h3 id=&quot;dune&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#dune&quot;&gt;&lt;/a&gt;&lt;span&gt;Dune&lt;/span&gt;&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span&gt;using only Dune to install the dependencies&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Build system for OCaml projects&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Used by about 3/4 of packages in Opam's repository&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Dependent on Opam to install dependencies... &lt;/span&gt;&lt;span pause&gt;&lt;/span&gt;&lt;span&gt; until now!&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/div&gt;
-&lt;div pause&gt;
+&lt;div pause&gt;&lt;/div&gt;
+&lt;h3 id=&quot;dune-package-management&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#dune-package-management&quot;&gt;&lt;/a&gt;&lt;span&gt;Dune Package Management&lt;/span&gt;&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span&gt;and using Dune to install development tools&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Dune can download and build Opam packages&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Parts of Opam turned into libraries and added to Dune&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Still using Opam metadata format and repository&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;h2 id=&quot;make-a-new-dune-project&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#make-a-new-dune-project&quot;&gt;&lt;/a&gt;&lt;span&gt;Make a New Dune Project&lt;/span&gt;&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;$ dune init project hello
+&lt;div pause&gt;&lt;/div&gt;
+&lt;h3 id=&quot;live-demo-of-dune-package-management&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#live-demo-of-dune-package-management&quot;&gt;&lt;/a&gt;&lt;span&gt;Live Demo of Dune Package Management&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;span&gt;Let's make an OCaml project using Dune:&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span&gt;With external dependencies&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Using only Dune to install the dependencies&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;And using Dune to install development tools&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;project-setup&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#project-setup&quot;&gt;&lt;/a&gt;&lt;span&gt;Project Setup&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;span&gt;Unload the Opam environment:&lt;/span&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ eval $(opam env --revert)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;generated-files-which-well-modify&quot; up-at-unpause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#generated-files-which-well-modify&quot;&gt;&lt;/a&gt;&lt;span&gt;Generated files which we'll modify&lt;/span&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;bin/main.ml&lt;/code&gt;&lt;span&gt;:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-ocaml&quot;&gt;let () = print_endline &amp;quot;Hello, World!&amp;quot;
+&lt;div pause&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span&gt;Make a project:&lt;/span&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune init project hello
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;bin/dune&lt;/code&gt;&lt;span&gt;:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(executable
- (public_name hello)
- (name main)
- (libraries hello))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;dune-project&lt;/code&gt;&lt;span&gt;:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(lang dune 3.20)
-
-(name hello)
-...
-(package
- (name hello)
- ...
- (depends ocaml))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;build-with-package-management&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#build-with-package-management&quot;&gt;&lt;/a&gt;&lt;span&gt;Build with Package Management&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;span&gt;The project currently depends on a single package: &lt;/span&gt;&lt;code&gt;ocaml&lt;/code&gt;&lt;span&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Make a &amp;quot;Lock Directory&amp;quot; (lockdir):&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ dune pkg lock
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune pkg lock
 Solution for dune.lock:
 - ocaml.5.3.0
 - ocaml-base-compiler.5.3.0
 - ocaml-compiler.5.3.0
 - ocaml-config.3
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;span&gt;Enable feature to print build progress:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ export DUNE_CONFIG__PKG_BUILD_PROGRESS=enabled
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;span&gt;Clean up the previously built artifacts:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ dune clean
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Build the project with package management!&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ dune build
- Downloading ocaml-compiler.5.3.0
-    Building ocaml-compiler.5.3.0
- Downloading ocaml-base-compiler.5.3.0
-    Building ocaml-base-compiler.5.3.0
-
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune exec hello
 Hello, World!
 &lt;/code&gt;&lt;/pre&gt;
-&lt;div down-at-unpause&gt;&lt;/div&gt;
-&lt;h2 id=&quot;dune-as-a-package-manager&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#dune-as-a-package-manager&quot;&gt;&lt;/a&gt;&lt;span&gt;Dune as a Package Manager&lt;/span&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;span&gt;Solves dependencies within one or more Opam repositories&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;Transcribes metadata from Opam files into sexp files in a &amp;quot;lockdir&amp;quot;&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;remark&quot;&gt;
-&lt;p&gt;&lt;span&gt;Lockdirs contain source urls and build commands for each package in the&lt;/span&gt;
-&lt;span&gt;project's transitive dependency closure.&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span&gt;The package solution in a lockdir is specialized to the machine where it was&lt;/span&gt;
-&lt;span&gt;generated. They are not portable between machines. Consider this when&lt;/span&gt;
-&lt;span&gt;deciding whether to check them into version control.&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span&gt;Think of a lockdir as a local cache of an opam package solution rather than a&lt;/span&gt;
-&lt;span&gt;lockfile in the sense of say &lt;/span&gt;&lt;code&gt;package-lock.json&lt;/code&gt;&lt;span&gt; or &lt;/span&gt;&lt;code&gt;Cargo.lock&lt;/code&gt;&lt;span&gt;.&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span&gt;It's a work-in-progress to generate lockdirs inside the _build directory by&lt;/span&gt;
-&lt;span&gt;default rather than the project root directory.&lt;/span&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;span&gt;More details on lockdirs later in this talk!&lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&quot;add-a-dependency&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#add-a-dependency&quot;&gt;&lt;/a&gt;&lt;span&gt;Add a Dependency&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;span&gt;Let's make a little website with Dream!&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;Let's make a little website with the Dream web framework!&lt;/span&gt;&lt;/p&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Add a dependency on the &lt;/span&gt;&lt;code&gt;dream&lt;/code&gt;&lt;span&gt; package in &lt;/span&gt;&lt;code&gt;dune-project&lt;/code&gt;&lt;span&gt;:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;...
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;...
 (package
  (name hello)
  ...
  (depends ocaml dream))
 &lt;/code&gt;&lt;/pre&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Declare that the &lt;/span&gt;&lt;code&gt;hello&lt;/code&gt;&lt;span&gt; executable uses the &lt;/span&gt;&lt;code&gt;dream&lt;/code&gt;&lt;span&gt; &lt;/span&gt;&lt;em&gt;&lt;span&gt;library&lt;/span&gt;&lt;/em&gt;&lt;span&gt; in &lt;/span&gt;&lt;code&gt;bin/dune&lt;/code&gt;&lt;span&gt;:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(executable
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;(executable
  (public_name hello)
  (name main)
  (libraries hello dream))
 &lt;/code&gt;&lt;/pre&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Build the project with the dependency:&lt;/span&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune build
 File &amp;quot;dune.lock/lock.dune&amp;quot;, line 1, characters 0-0:
@@ -1938,13 +1908,9 @@ Solution for dune.lock:
 - yojson.3.0.0
 - zarith.1.14
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;span&gt;Build, downloading and building all deps:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune build
-    Building base-threads.base
-    Building conf-pkg-config.4
-...
- Downloading dream.1.0.0~alpha8
-    Building dream.1.0.0~alpha8
+&lt;p&gt;&lt;span&gt;And build again:&lt;/span&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune exec hello
+Hello, World!
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div down-at-unpause pause&gt;&lt;/div&gt;
 &lt;h2 id=&quot;modify-our-program-to-use-the-new-dependency&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#modify-our-program-to-use-the-new-dependency&quot;&gt;&lt;/a&gt;&lt;span&gt;Modify our program to use the new dependency&lt;/span&gt;&lt;/h2&gt;
@@ -1958,18 +1924,22 @@ Solution for dune.lock:
 &lt;li&gt;&lt;span&gt;The LSP server must be compiled with the same compiler as the code it analyzes&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span&gt;Dune installs your compiler so it must also build your LSP&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Install LSP:&lt;/span&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ dune tools install ocamllsp
 &lt;/code&gt;&lt;/pre&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Where did it go:&lt;/span&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ dune tools which ocamllsp
 _build/_private/default/.dev-tool/ocaml-lsp-server/target/bin/ocamllsp
 &lt;/code&gt;&lt;/pre&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Add it to &lt;/span&gt;&lt;code&gt;PATH&lt;/code&gt;&lt;span&gt;:&lt;/span&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ eval $(dune tools env)
 &lt;/code&gt;&lt;/pre&gt;
+&lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;...and install ocamlformat while we're at it:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;$ dune tools install ocamlformat
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ dune tools install ocamlformat
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;modify-our-program-to-use-the-new-dependency-2&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#modify-our-program-to-use-the-new-dependency-2&quot;&gt;&lt;/a&gt;&lt;span&gt;Modify our program to use the new dependency&lt;/span&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;span&gt;Edit &lt;/span&gt;&lt;code&gt;bin/main.ml&lt;/code&gt;&lt;span&gt;:&lt;/span&gt;&lt;/p&gt;
@@ -1996,8 +1966,13 @@ _build/_private/default/.dev-tool/ocaml-lsp-server/target/bin/ocamllsp
  (package
   (name dream)))
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;span&gt;And re-solve dependencies:&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;And re-solve dependencies (again, soon this won't be necessary!):&lt;/span&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune pkg lock
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;span&gt;Rebuild and run including the change to the pinned &lt;/span&gt;&lt;code&gt;dream&lt;/code&gt;&lt;span&gt; package:&lt;/span&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune exec hello
+15.10.25 04:00:10.097       Running at http://localhost:8081
+15.10.25 04:00:10.097       Type Ctrl+C to stop
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&quot;peeking-under-the-hood&quot; class=&quot;fullscreen-center&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#peeking-under-the-hood&quot;&gt;&lt;/a&gt;&lt;span&gt;Peeking under the hood&lt;/span&gt;&lt;/h1&gt;
 &lt;h2 id=&quot;whats-in-a-lock-directory&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#whats-in-a-lock-directory&quot;&gt;&lt;/a&gt;&lt;span&gt;What's in a Lock Directory?&lt;/span&gt;&lt;/h2&gt;
@@ -2046,13 +2021,60 @@ _build/_private/default/.dev-tool/ocaml-lsp-server/target/bin/ocamllsp
   (checksum
    sha256=23ed812890c03fe5c9974a4961a9e8e62126bed7bc7d7d1440b84652c95cf296)))
 &lt;/code&gt;&lt;/pre&gt;
+&lt;div pause&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;Dune uses lock &lt;/span&gt;&lt;em&gt;&lt;span&gt;directories&lt;/span&gt;&lt;/em&gt;&lt;span&gt; rather than lock files for easy of code review of dependency changes.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;It's a work-in-progress to generate lockdirs inside the _build directory by&lt;/span&gt;
+&lt;span&gt;default rather than the project root directory.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;Think of a lockdir as a local cache of an opam package solution rather than a&lt;/span&gt;
+&lt;span&gt;lockfile in the sense of say &lt;/span&gt;&lt;code&gt;package-lock.json&lt;/code&gt;&lt;span&gt; or &lt;/span&gt;&lt;code&gt;Cargo.lock&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;The package solution in a lockdir is specialized to the machine where it was&lt;/span&gt;
+&lt;span&gt;generated. They are not portable between machines. Consider this when&lt;/span&gt;
+&lt;span&gt;deciding whether to check them into version control.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div down-at-unpause pause&gt;&lt;/div&gt;
+&lt;h2 id=&quot;portable-lockdirs-prototype&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#portable-lockdirs-prototype&quot;&gt;&lt;/a&gt;&lt;span&gt;Portable Lockdirs Prototype&lt;/span&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;This feature is a prototype for a lockfile format which is generalized to work on multiple platforms.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;Safe to check into version control.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;A Software Bill Of Materials for all the platforms where it will be deployed.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ export DUNE_CONFIG__PORTABLE_LOCK_DIR=enabled
+$ dune pkg lock
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;The feature flag is only necessary for &lt;/span&gt;&lt;em&gt;&lt;span&gt;generating&lt;/span&gt;&lt;/em&gt;&lt;span&gt; portable lockfiles.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span&gt;Without the flag, Dune will still interpret portable lockfiles if it sees them.&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&quot;where-are-the-packages&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#where-are-the-packages&quot;&gt;&lt;/a&gt;&lt;span&gt;Where are the packages?&lt;/span&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;span&gt;Project and tool dependencies in:&lt;/span&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;_build/_private/default/.pkg/&amp;lt;name&amp;gt;.&amp;lt;version&amp;gt;-&amp;lt;hash&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;source&lt;/code&gt;&lt;span&gt; directory contains copy of the project source&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;target&lt;/code&gt;&lt;span&gt; directory contains built artifacts akin to an Opam switch&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;source&lt;/code&gt;&lt;span&gt; directory contains copy of the project source&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;target&lt;/code&gt;&lt;span&gt; directory contains built artifacts akin to an Opam switch&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;custom-opam-repos&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#custom-opam-repos&quot;&gt;&lt;/a&gt;&lt;span&gt;Custom Opam Repos&lt;/span&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;span&gt;Opam repo configuration goes in &lt;/span&gt;&lt;code&gt;dune-workspace&lt;/code&gt;&lt;span&gt;:&lt;/span&gt;&lt;/p&gt;
@@ -2096,34 +2118,13 @@ _build/_private/default/.dev-tool/ocaml-lsp-server/target/bin/ocamllsp
 &lt;/ul&gt;
 &lt;p&gt;&lt;span&gt;Freezing the repositories lets you choose when you update your dependencies&lt;/span&gt;
 &lt;span&gt;without needing to check a lock directory into version control.&lt;/span&gt;&lt;/p&gt;
-&lt;h1 id=&quot;extras&quot; class=&quot;fullscreen-center&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#extras&quot;&gt;&lt;/a&gt;&lt;span&gt;Extras&lt;/span&gt;&lt;/h1&gt;
-&lt;h2 id=&quot;binary-install-script&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#binary-install-script&quot;&gt;&lt;/a&gt;&lt;span&gt;Binary Install Script&lt;/span&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;span&gt;If you don't have Opam you can install Dune by running:&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;$ curl -4fsSL https://github.com/ocaml-dune/dune-bin-install/releases/download/v3/install.sh | sh&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;span&gt;Runs an interactive installer which installs a pre-built version of Dune for your system.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;Follows installation conventions. Dune will be installed to &lt;/span&gt;&lt;code&gt;~/.local/bin&lt;/code&gt;&lt;span&gt; by default.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;Doesn't modify your shell config file without asking first.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;Installs shell completions for bash and zsh!&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;portable-lockfiles&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#portable-lockfiles&quot;&gt;&lt;/a&gt;&lt;span&gt;Portable Lockfiles&lt;/span&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;span&gt;Dune's lockfiles are specialized to the machine where they are generated.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;This feature is a prototype for a lockfile format which is generalized to work on multiple platforms.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;Safe to check into version control!&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ export DUNE_CONFIG__PORTABLE_LOCK_DIR=enabled
-$ dune pkg lock
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;span&gt;The feature flag is only necessary for &lt;/span&gt;&lt;em&gt;&lt;span&gt;generating&lt;/span&gt;&lt;/em&gt;&lt;span&gt; portable lockfiles.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;Without the flag, Dune will still interpret portable lockfiles if it sees them.&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h1 id=&quot;future-work&quot; up-at-unpause=&quot;~duration:0&quot; pause&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#future-work&quot;&gt;&lt;/a&gt;&lt;span&gt;Future Work&lt;/span&gt;&lt;/h1&gt;
 &lt;div class=&quot;large-text space-above&quot;&gt;
+&lt;div pause&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;span&gt;Automatically solving dependencies (no more &lt;/span&gt;&lt;code&gt;dune pkg lock&lt;/code&gt;&lt;span&gt;)&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
 &lt;div pause&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;span&gt;Allow building projects with circular deps via test deps (e.g. Dune itself via &lt;/span&gt;&lt;code&gt;ppx_expect&lt;/code&gt;&lt;span&gt;!)&lt;/span&gt;&lt;/li&gt;
@@ -2132,6 +2133,16 @@ $ dune pkg lock
 &lt;div pause&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;span&gt;Windows support&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div pause&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span&gt;Package maintenance features (e.g. building reverse dependencies to test impact of local changes)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div pause&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span&gt;Dune packages for system packages (apt, brew, etc)&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div pause&gt;

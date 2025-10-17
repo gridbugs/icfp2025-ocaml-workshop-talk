@@ -14,8 +14,15 @@
   }
 </style>
 
-{ center="~duration:0" #title }
+{ #title }
 # OCaml Package Management with (only!) Dune
+<center>
+<h2>Stephen Sherratt | Marek Kubica | Rudi Grinberg</h2>
+<h2>...and more of my colleagues at Tarides and the Dune community</h2>
+<hr>
+<h3>OCaml Workshop</h3>
+<h3>Friday 2025-10-17</h3>
+</center>
 
 { pause up="~duration:0" }
 ## Opam and Dune
@@ -411,7 +418,7 @@ without needing to check a lock directory into version control.
 > { pause }
 > - Automatically solving dependencies (no more `dune pkg lock`)
 > { pause }
-> - Allow building projects with circular deps via test deps (e.g. Dune itself via `ppx_expect`!)
+> - Allow building projects with benign circular dependencies (~40 packages including Dune itself)
 > { pause }
 > - Windows support
 > { pause }

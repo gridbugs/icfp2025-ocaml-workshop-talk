@@ -1825,8 +1825,8 @@ relevance:0},{begin:/-&gt;/}]})})();hljs.registerLanguage(&quot;ocaml&quot;,e)})
 &lt;div pause&gt;&lt;/div&gt;
 &lt;h3 id=&quot;opam&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#opam&quot;&gt;&lt;/a&gt;&lt;span&gt;Opam&lt;/span&gt;&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span&gt;Metadata format for OCaml packages&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;Tool for installing packages&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;CLI Tool for installing OCaml packages&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span&gt;Metadata format for packages&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span&gt;Repository of ~4500 packages&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div pause&gt;&lt;/div&gt;
@@ -1840,7 +1840,6 @@ relevance:0},{begin:/-&gt;/}]})})();hljs.registerLanguage(&quot;ocaml&quot;,e)})
 &lt;h3 id=&quot;dune-package-management&quot;&gt;&lt;a class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#dune-package-management&quot;&gt;&lt;/a&gt;&lt;span&gt;Dune Package Management&lt;/span&gt;&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;span&gt;Dune can download and build Opam packages&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span&gt;Parts of Opam turned into libraries and added to Dune&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span&gt;Still using Opam metadata format and repository&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div pause&gt;&lt;/div&gt;
@@ -1892,7 +1891,7 @@ Hello, World!
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div pause&gt;&lt;/div&gt;
 &lt;p&gt;&lt;span&gt;Build the project with the dependency:&lt;/span&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune build
+&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;$ dune exec hello
 File &amp;quot;dune.lock/lock.dune&amp;quot;, line 1, characters 0-0:
 Error: The lock dir is not sync with your dune-project
 Hint: run dune pkg lock

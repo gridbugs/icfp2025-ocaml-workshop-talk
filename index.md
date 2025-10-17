@@ -24,8 +24,8 @@
 
 ### Opam
 
-- Metadata format for OCaml packages
-- Tool for installing packages
+- CLI Tool for installing OCaml packages
+- Metadata format for packages
 - Repository of ~4500 packages
 
 { pause }
@@ -41,7 +41,6 @@
 ### Dune Package Management
 
 - Dune can download and build Opam packages
-- Parts of Opam turned into libraries and added to Dune
 - Still using Opam metadata format and repository
 
 { pause }
@@ -119,7 +118,7 @@ Declare that the `hello` executable uses the `dream` _library_ in `bin/dune`:
 
 Build the project with the dependency:
 ```text
-$ dune build
+$ dune exec hello
 File "dune.lock/lock.dune", line 1, characters 0-0:
 Error: The lock dir is not sync with your dune-project
 Hint: run dune pkg lock
